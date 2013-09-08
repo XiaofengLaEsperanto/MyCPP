@@ -1,0 +1,7 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    cout<<"Hello World!I'm Lv Xiaofeng."<<endl;
+    return 0;
+}
