@@ -1,0 +1,38 @@
+#include<iostream>
+#include <limits>
+using namespace std;
+int factorial(int num){
+    int r=1;
+    if(num>0){
+        while(num>0){
+        r*=num--;
+        }
+    }
+    return r;
+}
+int Comb(int m,int n){
+    int a,b;
+    a=factorial(m);
+    b=factorial(n)*factorial(m-n);
+    return a/b;
+}
+int main(){
+    unsigned int m,n;
+    cout<<"请输入C(m,n)中的m和n:\n"<<"m=";
+    cin>>m;
+    cout<<"n=";
+    cin>>n;
+    if(m<n){
+        cout<<"非法运算，m不能小于n。"<<endl;
+    }
+    else if(m==0){
+        cout<<"非法运算，m不能为0。"<<endl;
+    }
+    else{
+        cout<<"C(m,n)="<<Comb(m,n)<<endl;
+    }
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(),'\n');
+    cin.get();
+    return 0;
+}
