@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+class SafeArray{
+    private:
+        int MAXNUM;
+        int *intPtr;
+        bool ArrayIndexOutOfBounds(int index){
+            if(index>=MAXNUM||index<0) return true;
+            else return false;
+        }
+    public:
+        SafeArray(int cap);
+        void setData(int pos,int elem);
+        int get(int pos);
+};
+SafeArray::SafeArray(int cap){
+        intPtr=new int[cap];
+        MAXNUM=cap;
+}
+void SafeArray::setData(int pos,int elem){
+    if(!ArrayIndexOutOfBounds(pos)) *(intPtr+pos)=elem;
+    else cout<<"发生数组越界错误！"<<endl;
+}
+int SafeArray::get(int pos){
+    if(!ArrayIndexOutOfBounds(pos)) return *(intPtr+pos);
+    else cout<<"发生数组越界错误！"<<endl;
+}
