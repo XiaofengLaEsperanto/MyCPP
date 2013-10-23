@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+class Stack{
+    private:
+        int top;
+        int entry[100];
+    public:
+        bool isFull();
+        bool isEmpty();
+        void push(int n);
+        void pop(int *p);
+        Stack(){top=-1;}
+};
+bool Stack::isFull(){
+    if(top==99) return true;
+    else return false;
+}
+bool Stack::isEmpty(){
+    if(top==-1) return true;
+    else return false;
+}
+void Stack::push(int n){
+    if(!isFull()){
+        top++;
+        entry[top]=n;
+    }
+    else cout<<"Error01:Stack is full"<<endl;
+}
+void Stack::pop(int *p){
+    if(!isEmpty()){
+        *p=entry[top];
+        top--;
+    }
+    else cout<<"Error02:Stack is empty"<<endl;
+}
