@@ -1,0 +1,88 @@
+#include<iostream>
+#include <string.h>
+#include <limits>
+using namespace std;
+typedef struct node{
+    string name;
+    string StuID;
+    struct node *next;
+}Student,*StudentPtr;
+void addStudent(StudentPtr s,string n,string sID){
+    StudentPtr newStu=NULL,p=s;
+    while(p&&p->next){
+        p=p->next;
+    }
+    newStu=new Student;
+    if(newStu){
+        newStu->name=n;
+        newStu->StuID=sID;
+        p->next=newStu;
+    }
+    else cout<<"Error01"<<endl;
+}
+void deleteStudent(StudentPtr s,int pos){
+    int i=0;
+    StudentPtr t,p=s;
+    while(p&&i<pos-1){
+        i++;
+        p=p->next;
+    }
+    if(p&&i==pos-1){
+        t=p->next;
+        p->next=t->next;
+        delete(t);
+    }
+    else cout<<"Error02"<<endl;
+}
+void ListStudent(StudentPtr s,int i=1){
+    StudentPtr p=s;
+    if(i==1){
+        cout<<"序号\t姓名\t学号"<<endl;
+    }
+    if(p){
+        cout<<i<<"\t"<<p->name<<"\t"<<p->StuID<<endl;
+        ListStudent(p->next,++i);
+    }
+}
+int main(){
+    StudentPtr head=NULL;
+    int pos;
+    char Option;
+    string name,StuID;
+    while(1){
+        cout<<"请选择："<<endl;
+        cout<<"1、添加学生"<<endl;
+        cout<<"2、删除学生"<<endl;
+        cout<<"3、查看学生列表"<<endl;
+        cout<<"4、退出"<<endl;
+        cin>>Option;
+        switch(Option){
+            case '1':
+                cout<<"请输入姓名"<<endl;
+                cin>>name;
+                cout<<"请输入学号"<<endl;
+                cin>>StuID;
+                addStudent(head,name,StuID);
+                break;
+            case '2':
+                cout<<"请输入要删除的学生序号:"<<endl;
+                cin>>pos;
+                deleteStudent(head,pos);
+                break;
+            case '3':
+                if(head==NULL){
+                    cout<<"列表为空"<<endl;
+                    break;
+                }
+                ListStudent(head);
+            case '4':
+                break;
+            default:continue;
+        }
+        if(Option=='4') break;
+    }
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(),'\n');
+    cin.get();
+    return 0;
+}
